@@ -23,11 +23,13 @@ async function triggerPushNotification() {
       scope: "/",
     });
 
+    console.log("waiting for acceptance");
     const subscription = await register.pushManager.subscribe({
       userVisibleOnly: true,
       applicationServerKey: urlBase64ToUnit8Array(publicVapidKey),
     });
 
+    console.log("Acceptance completed");
     await fetch("/subscribe", {
       method: "POST",
       body: JSON.stringify(subscription),
